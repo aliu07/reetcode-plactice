@@ -99,6 +99,10 @@ class Solution3:
     """
 
     def maxLevelSum(self, root: Optional[TreeNode]) -> int:
+        # Don't need this, but keep to prevent type checker from yelling
+        if not root:
+            return 0
+
         currLevel, resLevel, maxSum = 0, 0, -inf
         q = [root]
 
