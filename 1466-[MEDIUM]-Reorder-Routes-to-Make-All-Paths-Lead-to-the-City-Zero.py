@@ -58,3 +58,48 @@ class Solution1:
                     seen.add(nei)
 
         return res
+
+
+
+class Solution2:
+    """
+    Intuition:
+        Same as Solution1. However, we use more basic data structures to reduce overhead.
+        We also separate the original and reverse edges into 2 different adjacency lists
+        to avoid the need for an extra 1/0 bit abstraction.
+    """
+
+    def minReorder(self, n: int, connections: List[List[int]]) -> int:
+        adj = [[] for _ in range(n)]
+        revAdj = [[] for _ in range(n)]
+
+        for u, v in connections:
+            # Original edges
+            adj[u].append(v)
+            # Artificial reverse edges
+            revAdj[v].append(u)
+
+        # Number of edges that need to be flipped
+        res = 0
+        # DFS from city 0, encode as (city, parent)
+        q = deque([0])
+        seen = [False] * n
+        seen[0] = True
+
+        while q:
+            city = q.pop()
+
+            # Any edge we take to reach further cities from the source of city 0
+            # that exist in the original connections needs to be flipped
+            for nei in adj[city]:
+                if not seen[nei]:
+                    res += 1
+                    q.append(nei)
+                    seen[nei] = True
+
+            for nei in revAdj[city]:
+                if not seen[nei]:
+                    q.append(nei)
+                    seen[nei] = True
+
+        return res
