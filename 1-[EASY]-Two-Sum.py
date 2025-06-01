@@ -8,6 +8,12 @@ class Solution:
         difference between the target number and the current number is
         contained within the hashmap
 
+    Runtime:
+        O(n) where n is the number of elements in the input array
+
+    Memory:
+        O(n) where n is the number of elements in the input array
+
     Notes:
         We need to return the indices in order. Since we iterate from left
         to right, we know that if target - num is in the map, then the index
