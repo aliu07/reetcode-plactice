@@ -50,6 +50,53 @@ class SmallestInfiniteSet1:
 
 
 
+class SmallestInfiniteSet2:
+    """
+    Intuition:
+        We can reduce the runtime complexity of the constructor. We know
+        that the smallest possible number at instantiation is 1, so we set
+        the current value accordingly. We still use a hashset and a heap,
+        but only for numbers who have been popped and added back. Our
+        invariant becomes that the numbers in the hashset and heaps are
+        guaranteed to be smaller than the self.current value (since they
+        have been previously popped and self.current would have been
+        incremented as a result).
+
+    Runtime:
+        __init__ -> O(1) now! Better than previous solution!
+        popSmallest -> Still O(log N)
+        addBack -> Also still O(log N)
+
+    Memory:
+        Still O(N)
+    """
+
+    def __init__(self):
+        # Keep track of current min (starts at 1 by default)
+        self.current = 1
+        # Keep track of numbers that have been popped, but added back
+        # using heap data struct
+        self.minHeap = []
+        # Also store them in hashset for quick lookups
+        self.addedBack = set()
+
+    def popSmallest(self) -> int:
+        if self.minHeap:
+            smallest = heapq.heappop(self.minHeap)
+            self.addedBack.remove(smallest)
+            return smallest
+
+        smallest = self.current
+        self.current += 1
+        return smallest
+
+    def addBack(self, num: int) -> None:
+        if num < self.current and num not in self.addedBack:
+            heapq.heappush(self.minHeap, num)
+            self.addedBack.add(num)
+
+
+
 # Your SmallestInfiniteSet object will be instantiated and called as such:
 # obj = SmallestInfiniteSet()
 # param_1 = obj.popSmallest()
