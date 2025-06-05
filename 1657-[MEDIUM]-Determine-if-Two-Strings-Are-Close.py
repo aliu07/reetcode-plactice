@@ -1,4 +1,6 @@
-class Solution:
+from collections import Counter
+
+class Solution1:
     """
     Intuition:
         We are given 2 possible operations:
@@ -41,3 +43,27 @@ class Solution:
             freq2[ord(c2) - ord('a')] += 1
 
         return sorted(freq1) == sorted(freq2) and chars1 == chars2
+
+
+
+class Solution2:
+    """
+    Intuition:
+        Same as Solution1.
+
+    Runtime:
+        O(n) as well.
+
+    Memory:
+        O(n) as well.
+    """
+
+    def closeStrings(self, word1: str, word2: str) -> bool:
+        if len(word1) != len(word2):
+            return False
+
+        map1 = Counter(word1)
+        map2 = Counter(word2)
+
+        # Sorting is not expensive here since collection has length of at most 26
+        return map1.keys() == map2.keys() and sorted(map1.values()) == sorted(map2.values())
