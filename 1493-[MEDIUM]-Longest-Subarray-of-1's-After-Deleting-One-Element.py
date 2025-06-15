@@ -1,4 +1,4 @@
-from prelude import *
+from typing import List
 
 class Solution1:
     """
