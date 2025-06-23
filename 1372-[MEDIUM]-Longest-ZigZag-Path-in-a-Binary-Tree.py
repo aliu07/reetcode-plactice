@@ -7,7 +7,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We need to traverse the tree while encoding the direction somehow
@@ -48,3 +48,54 @@ class Solution:
         dfs(root.right, 'right', 1)
 
         return self.maxLen
+
+
+
+class Solution2:
+    """
+    Intuition:
+        Same as Solution1
+
+    Runtime:
+        Same as Solution1
+
+    Memory:
+        Same as Solution1
+
+    Notes:
+        Apparently, if we track the results in an array instead of tracking the maxLen
+        as a class variable and remove the None check from inside the helper function,
+        we get much, much better runtime on the platform.
+
+        This is a trivial change, I just added this because I found it funny.
+    """
+
+    def longestZigZag(self, root: Optional[TreeNode]) -> int:
+        results = []
+
+        def dfs(node, dir, currLen):
+            results.append(currLen)
+
+            if dir == 'left':
+                if node.right:
+                    dfs(node.right, 'right', currLen + 1)
+
+                if node.left:
+                    dfs(node.left, 'left', 1)
+            else:
+                if node.left:
+                    dfs(node.left, 'left', currLen + 1)
+
+                if node.right:
+                    dfs(node.right, 'right', 1)
+
+        if not root or (not root.left and not root.right):
+            return 0
+
+        if root.left:
+            dfs(root.left, 'left', 1)
+
+        if root.right:
+            dfs(root.right, 'right', 1)
+
+        return max(results)
