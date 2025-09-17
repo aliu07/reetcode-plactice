@@ -1,4 +1,5 @@
 from typing import List
+from collections import deque
 
 import heapq
 
@@ -79,5 +80,53 @@ class Solution2:
                     heapq.heappop(heap)
 
                 res.append(-heap[0][0])
+
+        return res
+
+class Solution3:
+    """
+    Intuition:
+        Instead of using a heap to track the elements in our current window, we model the same
+        idea using the double-ended deque data structure. This queue will always be in decreasing
+        order with the current max at index 0.
+
+        Why do we model our deque like so? Because if I encounter a max element inside a window,
+        I don't care about any element preceding it, and therefore can remove them.
+
+        As an added step, we also need to keep track if the current max goes out of scope as we
+        increment our window and delete it accordingly.
+
+    Runtime:
+        Each elmt of nums is processed once, leading to O(n). Each elmt is added to the queue and
+        popped from the queue at most once as well. Popping and appending to the queue takes O(1)
+        time. Therefore, the overall time complexity is O(n).
+
+    Memory:
+        The queue we store contains at most n elements where n is the length of nums. Thus, the
+        memory complexity is O(n).
+    """
+
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        q = deque()
+        res = []
+
+        for i in range(k):
+            while q and q[-1] < nums[i]:
+                q.pop()
+
+            q.append(nums[i])
+
+        res.append(q[0])
+
+        for i in range(k, len(nums)):
+            # remove elmt falling out of window if it's the current max
+            if q and q[0] == nums[i - k]:
+                q.popleft()
+
+            while q and q[-1] < nums[i]:
+                q.pop()
+
+            q.append(nums[i])
+            res.append(q[0])
 
         return res
