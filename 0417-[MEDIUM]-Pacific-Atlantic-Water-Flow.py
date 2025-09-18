@@ -1,6 +1,7 @@
 from typing import List
 from collections import deque
 
+
 class Solution:
     """
     Intuition:
@@ -43,7 +44,6 @@ class Solution:
                 if 0 <= new_r < M and 0 <= new_c < N and height <= heights[new_r][new_c] and not atlantic[new_r][new_c]:
                     q.append((heights[new_r][new_c], new_r, new_c))
 
-
         # Process Pacific
         pacific = [[False] * N for _ in range(M)]
         init = []
@@ -64,7 +64,6 @@ class Solution:
 
                 if 0 <= new_r < M and 0 <= new_c < N and height <= heights[new_r][new_c] and not pacific[new_r][new_c]:
                     q.append((heights[new_r][new_c], new_r, new_c))
-
 
         # Compute res
         res = []

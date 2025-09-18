@@ -1,6 +1,7 @@
 from typing import List
 from collections import deque
 
+
 class Solution1:
     """
     Intuition:
@@ -58,7 +59,6 @@ class Solution1:
                     seen.add(nei)
 
         return res
-
 
 
 class Solution2:

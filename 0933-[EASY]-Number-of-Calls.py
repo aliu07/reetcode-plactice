@@ -1,6 +1,7 @@
 import heapq
 from collections import deque
 
+
 class RecentCounter1:
     """
     Intuition:
@@ -39,7 +40,6 @@ class RecentCounter1:
 # Your RecentCounter object will be instantiated and called as such:
 # obj = RecentCounter()
 # param_1 = obj.ping(t)
-
 
 
 class RecentCounter2:

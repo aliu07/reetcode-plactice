@@ -3,6 +3,7 @@ from collections import deque
 
 import heapq
 
+
 class Solution1:
     """
     Intuition:
@@ -56,6 +57,7 @@ class Solution1:
 
         return res
 
+
 class Solution2:
     """
     Intuition:
@@ -82,6 +84,7 @@ class Solution2:
                 res.append(-heap[0][0])
 
         return res
+
 
 class Solution3:
     """

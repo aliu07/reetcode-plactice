@@ -1,10 +1,12 @@
 from typing import Optional
 
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+
 
 class Solution:
     """
@@ -41,7 +43,7 @@ class Solution:
             fast = fast.next.next
 
         second_half = slow.next
-        slow.next = None # break link
+        slow.next = None  # break link
 
         # Reverse second half of LL
         prev, curr = None, second_half

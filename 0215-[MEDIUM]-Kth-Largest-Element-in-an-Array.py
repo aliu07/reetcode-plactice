@@ -2,6 +2,7 @@ import heapq
 from typing import List
 from math import inf
 
+
 class Solution1:
     """
     Intuition:
@@ -19,7 +20,6 @@ class Solution1:
             heapq.heappop(heap)
 
         return -heap[0]
-
 
 
 class Solution2:
@@ -41,7 +41,6 @@ class Solution2:
                 heapq.heappop(heap)
 
         return heap[0]
-
 
 
 class Solution3:

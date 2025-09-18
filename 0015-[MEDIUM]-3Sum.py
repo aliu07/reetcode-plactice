@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution:
     """
     Intuition:
@@ -37,7 +38,6 @@ class Solution:
                 continue
 
             # Use 2 ptr approach on sorted partition
-            target = -nums[i]
             l, r = i + 1, len(nums) - 1
 
             while l < r:

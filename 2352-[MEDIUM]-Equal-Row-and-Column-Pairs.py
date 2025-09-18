@@ -1,6 +1,7 @@
 from typing import List
 from collections import Counter
 
+
 class Solution:
     """
     Intuition:
@@ -19,6 +20,7 @@ class Solution:
         O(n^2). In the worst case, the 'rows' hashmap contains n rows of
         length n each.
     """
+
     def equalPairs(self, grid: List[List[int]]) -> int:
         N = len(grid)
         res = 0

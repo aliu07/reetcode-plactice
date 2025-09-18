@@ -1,5 +1,6 @@
 import heapq
 
+
 class SmallestInfiniteSet1:
     """
     Intuition:
@@ -49,7 +50,6 @@ class SmallestInfiniteSet1:
             heapq.heappush(self.nums, num)
 
 
-
 class SmallestInfiniteSet2:
     """
     Intuition:
@@ -94,7 +94,6 @@ class SmallestInfiniteSet2:
         if num < self.current and num not in self.addedBack:
             heapq.heappush(self.minHeap, num)
             self.addedBack.add(num)
-
 
 
 # Your SmallestInfiniteSet object will be instantiated and called as such:

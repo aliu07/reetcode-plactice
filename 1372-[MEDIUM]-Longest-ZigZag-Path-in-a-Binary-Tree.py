@@ -1,11 +1,13 @@
 from typing import Optional
 
+
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
+
 
 class Solution1:
     """
@@ -30,25 +32,23 @@ class Solution1:
     maxLen = 0
 
     def longestZigZag(self, root: Optional[TreeNode]) -> int:
-
         def dfs(node, dir, currLen):
             if not node:
                 return
 
             self.maxLen = max(currLen, self.maxLen)
 
-            if dir == 'left':
-                dfs(node.right, 'right', currLen + 1)
-                dfs(node.left, 'left', 1)
+            if dir == "left":
+                dfs(node.right, "right", currLen + 1)
+                dfs(node.left, "left", 1)
             else:
-                dfs(node.left, 'left', currLen + 1)
-                dfs(node.right, 'right', 1)
+                dfs(node.left, "left", currLen + 1)
+                dfs(node.right, "right", 1)
 
-        dfs(root.left, 'left', 1)
-        dfs(root.right, 'right', 1)
+        dfs(root.left, "left", 1)
+        dfs(root.right, "right", 1)
 
         return self.maxLen
-
 
 
 class Solution2:
@@ -76,26 +76,26 @@ class Solution2:
         def dfs(node, dir, currLen):
             results.append(currLen)
 
-            if dir == 'left':
+            if dir == "left":
                 if node.right:
-                    dfs(node.right, 'right', currLen + 1)
+                    dfs(node.right, "right", currLen + 1)
 
                 if node.left:
-                    dfs(node.left, 'left', 1)
+                    dfs(node.left, "left", 1)
             else:
                 if node.left:
-                    dfs(node.left, 'left', currLen + 1)
+                    dfs(node.left, "left", currLen + 1)
 
                 if node.right:
-                    dfs(node.right, 'right', 1)
+                    dfs(node.right, "right", 1)
 
         if not root or (not root.left and not root.right):
             return 0
 
         if root.left:
-            dfs(root.left, 'left', 1)
+            dfs(root.left, "left", 1)
 
         if root.right:
-            dfs(root.right, 'right', 1)
+            dfs(root.right, "right", 1)
 
         return max(results)

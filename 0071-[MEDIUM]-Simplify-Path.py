@@ -8,6 +8,7 @@ class Solution1:
         - Can leverage built-in functions in python to do string
         splitting
     """
+
     def simplifyPath(self, path: str) -> str:
         stack = []
         ix = 0
@@ -36,12 +37,12 @@ class Solution1:
         return "/" + "/".join(stack)
 
 
-
 class Solution2:
     """
     Improvements:
         - Use built-in functions to improve runtime performance
     """
+
     def simplifyPath(self, path: str) -> str:
         stack = []
 

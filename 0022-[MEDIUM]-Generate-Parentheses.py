@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution:
     """
     Intuition:
@@ -30,11 +31,11 @@ class Solution:
                 res.append(curr)
 
             if open < n:
-                dfs(open + 1, curr + '(')
+                dfs(open + 1, curr + "(")
 
             if open > len(curr) / 2:
-                dfs(open, curr + ')')
+                dfs(open, curr + ")")
 
-        dfs(0, '')
+        dfs(0, "")
 
         return res

@@ -34,7 +34,6 @@ class Solution1:
         return True
 
 
-
 class Solution2:
     """
     Notes:
@@ -55,7 +54,7 @@ class Solution2:
 
         while l <= r:
             if s[l] != s[r]:
-                skipL, skipR = s[l+1:r+1], s[l:r]
+                skipL, skipR = s[l + 1 : r + 1], s[l:r]
                 return skipL == skipL[::-1] or skipR == skipR[::-1]
 
             l += 1

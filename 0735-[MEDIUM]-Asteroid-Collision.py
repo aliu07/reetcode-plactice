@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution1:
     """
     Intuition:
@@ -57,7 +58,6 @@ class Solution1:
         return stack
 
 
-
 class Solution2:
     """
     Intuition:
@@ -69,7 +69,7 @@ class Solution2:
     """
 
     def asteroidCollision(self, asteroids: List[int]) -> List[int]:
-        stack=[]
+        stack = []
 
         for a in asteroids:
             # While there are asteroids to collide and we have an asteroid

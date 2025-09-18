@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution:
     """
     Intuition:
@@ -14,7 +15,7 @@ class Solution:
     """
 
     def maxArea(self, height: List[int]) -> int:
-        l ,r = 0, len(height) - 1
+        l, r = 0, len(height) - 1
         maxVol = 0
 
         while l < r:

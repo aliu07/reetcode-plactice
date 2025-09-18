@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution1:
     """
     Intuition:
@@ -51,7 +52,6 @@ class Solution1:
             r += 1
 
         return res if hasDeleted else res - 1
-
 
 
 class Solution2:

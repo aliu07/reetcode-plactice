@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution:
     """
     Intuition:
@@ -28,7 +29,7 @@ class Solution:
 
                 match t:
                     case "+":
-                       res = n1 + n2
+                        res = n1 + n2
                     case "-":
                         res = n1 - n2
                     case "*":

@@ -25,7 +25,6 @@ class Solution1:
         return dp[-1]
 
 
-
 class Solution2:
     """
     Intuition:
@@ -39,6 +38,7 @@ class Solution2:
     Memory:
         O(1) now since we removed the need for a dp cache.
     """
+
     def tribonacci(self, n: int) -> int:
         # Base cases
         t0, t1, t2 = 0, 1, 1

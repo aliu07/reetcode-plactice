@@ -30,7 +30,6 @@ class Solution1:
         return "".join(res)
 
 
-
 class Solution2:
     """
     Intuition:

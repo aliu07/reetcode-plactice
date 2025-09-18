@@ -1,5 +1,6 @@
 from collections import deque
 
+
 class Solution1:
     """
     Intuition:
@@ -17,7 +18,6 @@ class Solution1:
         # Filter out empty strings
         words = [word for word in words if word]
         return " ".join(words[::-1])
-
 
 
 class Solution2:

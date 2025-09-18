@@ -25,7 +25,7 @@ class Solution:
             if word[ix] == abbr[jx]:
                 ix += 1
                 jx += 1
-            elif abbr[jx] == '0':
+            elif abbr[jx] == "0":
                 return False
             elif abbr[jx].isnumeric():
                 # Store starting index of numeric substring
@@ -34,7 +34,7 @@ class Solution:
                 while jx < len(abbr) and abbr[jx].isnumeric():
                     jx += 1
 
-                ix += int(abbr[kx: jx])
+                ix += int(abbr[kx:jx])
             else:
                 return False
 

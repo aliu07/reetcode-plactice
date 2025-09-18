@@ -1,6 +1,7 @@
 from typing import List, Set
 from collections import deque
 
+
 class Solution:
     """
     Intuition:
@@ -30,7 +31,6 @@ class Solution:
                     if isConnected[c][i] == 1 and i in availableCities:
                         q.append(i)
                         availableCities.remove(i)
-
 
         N = len(isConnected)
         availableCities = set([i for i in range(N)])

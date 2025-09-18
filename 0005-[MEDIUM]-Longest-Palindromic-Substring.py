@@ -23,7 +23,7 @@ class Solution:
 
             while 0 <= l and r < len(s) and s[l] == s[r]:
                 if r - l + 1 > resLen:
-                    res = s[l:r + 1]
+                    res = s[l : r + 1]
                     resLen = r - l + 1
 
                 l -= 1
@@ -34,7 +34,7 @@ class Solution:
 
             while 0 <= l and r < len(s) and s[l] == s[r]:
                 if r - l + 1 > resLen:
-                    res = s[l:r + 1]
+                    res = s[l : r + 1]
                     resLen = r - l + 1
 
                 l -= 1

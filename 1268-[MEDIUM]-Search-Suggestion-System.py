@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution:
     """
     Intuition:
@@ -54,7 +55,7 @@ class Solution:
             curr = self.root
 
             for c in word:
-                ix = ord(c) - ord('a')
+                ix = ord(c) - ord("a")
 
                 if not curr.children[ix]:
                     curr.children[ix] = Solution.TrieNode()
@@ -69,7 +70,7 @@ class Solution:
             words = []
 
             for c in prefix:
-                ix = ord(c) - ord('a')
+                ix = ord(c) - ord("a")
 
                 if not curr.children[ix]:
                     return words
@@ -80,7 +81,7 @@ class Solution:
 
             return words
 
-        def dfsWithPrefix(self, curr: 'Solution.TrieNode', word: str, words: List[str]):
+        def dfsWithPrefix(self, curr: "Solution.TrieNode", word: str, words: List[str]):
             if len(words) == 3:
                 return
 
@@ -89,4 +90,4 @@ class Solution:
 
             for i in range(26):
                 if curr.children[i]:
-                    self.dfsWithPrefix(curr.children[i], word + chr(i + ord('a')), words)
+                    self.dfsWithPrefix(curr.children[i], word + chr(i + ord("a")), words)

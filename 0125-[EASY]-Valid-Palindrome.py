@@ -31,7 +31,6 @@ class Solution1:
         return True
 
 
-
 class Solution2:
     """
     Improvements:
@@ -39,5 +38,5 @@ class Solution2:
     """
 
     def isPalindrome(self, s: str) -> bool:
-        s = ''.join(char for char in s.lower() if char.isalnum())
+        s = "".join(char for char in s.lower() if char.isalnum())
         return s == s[::-1]

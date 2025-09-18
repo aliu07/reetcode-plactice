@@ -1,5 +1,6 @@
 from collections import Counter
 
+
 class Solution1:
     """
     Intuition:
@@ -39,11 +40,10 @@ class Solution1:
             chars1.add(c1)
             chars2.add(c2)
 
-            freq1[ord(c1) - ord('a')] += 1
-            freq2[ord(c2) - ord('a')] += 1
+            freq1[ord(c1) - ord("a")] += 1
+            freq2[ord(c2) - ord("a")] += 1
 
         return sorted(freq1) == sorted(freq2) and chars1 == chars2
-
 
 
 class Solution2:

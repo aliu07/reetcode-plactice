@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution:
     """
     Intuition:
@@ -14,7 +15,6 @@ class Solution:
     Memory:
         O(N ^ 2) as well where N is the value of numRows.
     """
-
 
     def generate(self, numRows: int) -> List[List[int]]:
         # Base cases

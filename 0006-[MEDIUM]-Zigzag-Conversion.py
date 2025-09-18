@@ -35,10 +35,9 @@ class Solution1:
         res = ""
 
         for row in rows:
-            res += ''.join(row)
+            res += "".join(row)
 
         return res
-
 
 
 class Solution2:

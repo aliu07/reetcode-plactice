@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Codec:
     """
     Intuition:
@@ -20,20 +21,17 @@ class Codec:
     """
 
     def encode(self, strs: List[str]) -> str:
-        """Encodes a list of strings to a single string.
-        """
+        """Encodes a list of strings to a single string."""
 
         res = ""
 
         for s in strs:
-            res += str(len(s)) + '#' + s
+            res += str(len(s)) + "#" + s
 
         return res
 
-
     def decode(self, s: str) -> List[str]:
-        """Decodes a single string to a list of strings.
-        """
+        """Decodes a single string to a list of strings."""
 
         ix = 0
         res = []
@@ -41,7 +39,7 @@ class Codec:
         while ix < len(s):
             jx = ix
 
-            while s[jx] != '#':
+            while s[jx] != "#":
                 jx += 1
 
             length = int(s[ix:jx])

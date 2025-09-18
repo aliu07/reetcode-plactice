@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution:
     """
     Intuition:
@@ -61,7 +62,7 @@ class Trie:
             curr = curr[c]
 
         # Mark end of word
-        curr['#'] = {}
+        curr["#"] = {}
 
     def search(self, word: str) -> bool:
         curr = self.root
@@ -72,7 +73,7 @@ class Trie:
 
             curr = curr[c]
 
-        return '#' in curr
+        return "#" in curr
 
     def startsWith(self, prefix: str) -> bool:
         curr = self.root

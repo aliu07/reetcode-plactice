@@ -1,6 +1,7 @@
 from typing import List
 from heapq import heapify, heappop, heappush
 
+
 class Solution:
     """
     Intuition:
@@ -35,7 +36,7 @@ class Solution:
         totalCost = 0
         l, r = candidates, len(costs) - candidates - 1
         left = costs[:candidates]
-        right = costs[max(candidates, len(costs)-candidates):]
+        right = costs[max(candidates, len(costs) - candidates) :]
         heapify(left)
         heapify(right)
 

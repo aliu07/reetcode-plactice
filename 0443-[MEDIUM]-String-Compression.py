@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution1:
     """
     Intuition:
@@ -35,7 +36,6 @@ class Solution1:
         return len(res)
 
 
-
 class Solution2:
     """
     Intuition:
@@ -62,7 +62,7 @@ class Solution2:
 
     def compress(self, chars: List[str]) -> int:
         l = 0
-        ix = 0 # Insertion index
+        ix = 0  # Insertion index
 
         while l < len(chars):
             r = l

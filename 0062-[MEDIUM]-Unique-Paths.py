@@ -1,5 +1,6 @@
 import math
 
+
 class Solution1:
     """
     Intuition:
@@ -17,9 +18,8 @@ class Solution1:
 
     def uniquePaths(self, m: int, n: int) -> int:
         N = (m - 1) + (n - 1)
-        K = (m - 1)
+        K = m - 1
         return math.factorial(N) // (math.factorial(K) * math.factorial(N - K))
-
 
 
 class Solution2:

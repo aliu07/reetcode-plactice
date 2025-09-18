@@ -1,10 +1,12 @@
 from typing import Optional
 
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+
 
 class Solution:
     """
@@ -21,6 +23,7 @@ class Solution:
     Memory:
         O(n) to build the merged list, but technically O(1) auxiliary space.
     """
+
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         dummy = curr = ListNode()
         l1, l2 = list1, list2

@@ -1,13 +1,15 @@
 from typing import Optional
 from collections import deque
 
+
 # Definition for a Node.
 class Node:
-    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+    def __init__(self, val: int = 0, left: "Node" = None, right: "Node" = None, next: "Node" = None):
         self.val = val
         self.left = left
         self.right = right
         self.next = next
+
 
 class Solution:
     """
@@ -24,7 +26,7 @@ class Solution:
         of the tree, we can simplify O(n/2) to O(n).
     """
 
-    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+    def connect(self, root: "Optional[Node]") -> "Optional[Node]":
         if not root:
             return None
 

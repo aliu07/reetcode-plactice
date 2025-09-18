@@ -1,10 +1,12 @@
 from typing import Optional
 
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+
 
 class Solution1:
     """
@@ -37,7 +39,6 @@ class Solution1:
             sums.append(nums[i] + nums[-1 - i])
 
         return max(sums)
-
 
 
 class Solution2:

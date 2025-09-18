@@ -20,7 +20,6 @@ class Solution1:
         return res if n > 0 else 1 / res
 
 
-
 class Solution2:
     """
     Intuition:
@@ -47,7 +46,6 @@ class Solution2:
 
         res = helper_pow(x, abs(n))
         return res if n > 0 else 1 / res
-
 
 
 class Solution3:

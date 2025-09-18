@@ -1,5 +1,6 @@
 import math
 
+
 class MinStack:
     """
     Intuition:
@@ -26,11 +27,10 @@ class MinStack:
         O(n) since we keep 2 stacks.
     """
 
-
     def __init__(self):
-       self.stack = []
-       self.minStack = []
-       self.currMin = math.inf
+        self.stack = []
+        self.minStack = []
+        self.currMin = math.inf
 
     def push(self, val: int) -> None:
         if val < self.currMin:
@@ -45,7 +45,6 @@ class MinStack:
 
         # reset currMin
         self.currMin = self.minStack[-1] if self.minStack else math.inf
-
 
     def top(self) -> int:
         return self.stack[-1]

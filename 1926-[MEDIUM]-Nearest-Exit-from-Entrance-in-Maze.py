@@ -1,6 +1,7 @@
 from typing import List
 from collections import deque
 
+
 class Solution1:
     """
     Intuition:
@@ -49,7 +50,6 @@ class Solution1:
         return -1
 
 
-
 class Solution2:
     """
     Intuition:
@@ -89,7 +89,7 @@ class Solution2:
                     I, J = i + di, j + dj
 
                     if (I < 0 or I == m or J < 0 or J == n) and steps > 0:
-                            return steps
+                        return steps
 
                     if 0 <= I < m and 0 <= J < n and maze[I][J] == ".":
                         q.append((I, J))

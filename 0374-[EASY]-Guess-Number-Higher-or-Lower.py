@@ -8,6 +8,7 @@
 def guess(num: int) -> int:
     return 0
 
+
 class Solution:
     """
     Intuition:

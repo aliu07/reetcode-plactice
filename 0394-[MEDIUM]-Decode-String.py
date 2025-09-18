@@ -28,12 +28,12 @@ class Solution1:
         stack = []
 
         while ix < len(s):
-            if s[ix] != ']':
+            if s[ix] != "]":
                 stack.append(s[ix])
             else:
                 sequence = stack.pop()
 
-                while stack and stack[-1] != '[':
+                while stack and stack[-1] != "[":
                     sequence = stack.pop() + sequence
 
                 # Pop '[' character
@@ -50,8 +50,7 @@ class Solution1:
 
             ix += 1
 
-        return ''.join(stack)
-
+        return "".join(stack)
 
 
 class Solution2:
@@ -96,13 +95,13 @@ class Solution2:
         for char in s:
             if char.isdigit():
                 currMul += char
-            elif char == '[':
+            elif char == "[":
                 multipliers.append(int(currMul))
                 sequences.append(currSeq)
 
                 # Reset values
                 currSeq, currMul = "", ""
-            elif char == ']':
+            elif char == "]":
                 decoded = sequences.pop()
                 multiplier = multipliers.pop()
 

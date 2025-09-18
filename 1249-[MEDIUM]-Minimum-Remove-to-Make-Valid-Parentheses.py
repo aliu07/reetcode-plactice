@@ -21,7 +21,7 @@ class Solution1:
 
     def minRemoveToMakeValid(self, s: str) -> str:
         stack = []
-        invalid = set() # Track invalid indices
+        invalid = set()  # Track invalid indices
 
         for i, char in enumerate(s):
             if char == "(":
@@ -36,7 +36,6 @@ class Solution1:
         for char, i in stack:
             invalid.add(i)
 
-
         res = ""
         for i in range(len(s)):
             if i in invalid:
@@ -45,7 +44,6 @@ class Solution1:
             res += s[i]
 
         return res
-
 
 
 class Solution2:
@@ -71,7 +69,7 @@ class Solution2:
             res.append(char)
 
         if numL == 0:
-            return ''.join(res)
+            return "".join(res)
 
         numR = 0
         for i in range(len(res) - 1, -1, -1):
@@ -80,8 +78,8 @@ class Solution2:
 
             if res[i] == "(":
                 if numR == 0:
-                    res[i] = ''
+                    res[i] = ""
                 else:
                     numR -= 1
 
-        return ''.join(res)
+        return "".join(res)

@@ -3,6 +3,7 @@ class TrieNode:
         self.children = [None] * 26
         self.isEndOfWord = False
 
+
 class Trie1:
     """
     Intuition:
@@ -35,7 +36,7 @@ class Trie1:
         curr = self.root
 
         for c in word:
-            ix = ord(c) - ord('a')
+            ix = ord(c) - ord("a")
 
             if not curr.children[ix]:
                 curr.children[ix] = TrieNode()
@@ -49,7 +50,7 @@ class Trie1:
         curr = self.root
 
         for c in word:
-            ix = ord(c) - ord('a')
+            ix = ord(c) - ord("a")
 
             if not curr.children[ix]:
                 return False
@@ -62,7 +63,7 @@ class Trie1:
         curr = self.root
 
         for c in prefix:
-            ix = ord(c) - ord('a')
+            ix = ord(c) - ord("a")
 
             if not curr.children[ix]:
                 return False
@@ -70,7 +71,6 @@ class Trie1:
             curr = curr.children[ix]
 
         return True
-
 
 
 class Trie:
@@ -94,7 +94,7 @@ class Trie:
 
         # Mark end of word
         # We use the '#' special character to encode the end of word bool
-        curr['#'] = True
+        curr["#"] = True
 
     def search(self, word: str) -> bool:
         curr = self.root
@@ -105,7 +105,7 @@ class Trie:
 
             curr = curr[c]
 
-        return curr.get('#', False)
+        return curr.get("#", False)
 
     def startsWith(self, prefix: str) -> bool:
         curr = self.root
@@ -117,7 +117,6 @@ class Trie:
             curr = curr[c]
 
         return True
-
 
 
 # Your Trie object will be instantiated and called as such:

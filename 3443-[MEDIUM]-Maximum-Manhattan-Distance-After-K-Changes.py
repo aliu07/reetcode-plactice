@@ -24,18 +24,19 @@ class Solution:
     Memory:
         O(1) obviously.
     """
+
     def maxDistance(self, s: str, k: int) -> int:
         x, y = 0, 0
         res = 0
 
         for ix, c in enumerate(s):
-            if c == 'N':
+            if c == "N":
                 y += 1
-            elif c == 'S':
+            elif c == "S":
                 y -= 1
-            elif c == 'E':
+            elif c == "E":
                 x += 1
-            elif c == 'W':
+            elif c == "W":
                 x -= 1
 
             res = max(res, min(abs(x) + abs(y) + 2 * k, ix + 1))

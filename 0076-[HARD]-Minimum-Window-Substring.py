@@ -2,6 +2,7 @@ from collections import Counter, defaultdict
 
 import math
 
+
 class Solution:
     """
     Intuition:
@@ -49,7 +50,7 @@ class Solution:
             while have == need:
                 if r - l + 1 < shortest:
                     shortest = r - l + 1
-                    res = s[l:r+1]
+                    res = s[l : r + 1]
 
                 window[s[l]] -= 1
 
