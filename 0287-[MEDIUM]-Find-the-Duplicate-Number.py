@@ -55,3 +55,50 @@ class Solution2:
                 return abs(n)
 
             nums[ix] *= -1
+
+
+class Solution3:
+    """
+    Intuition:
+        Now what if we are told that we cannot modify the array? We can
+        use Floyd's Tortoise and Hare cycle detection algorithm.
+
+        We have n + 1 slots for elements in the range [1, n]. By the
+        pigeonhole principle, at least one number repeats. Here, we can
+        think of each index as a node. The value at the node is the
+        pointer to the next node. Thus, having an array with a duplicate
+        element is analogous to having a linked list with a cycle.
+
+        The first loop detects a the presence of a cycle. If there is
+        one, the slow and fast pointers will eventually meet.
+
+        The second loop finds the 'entry point' of the cycle i.e. the
+        duplicate number.
+
+    Runtime:
+        The slow ptr in the first loop moves at 1 increment per step.
+        Thus, runtime is O(n).
+
+        The second loop, we restart slow2 at the head and it also moves
+        at one increment per step. Thus, the runtime is also O(n).
+
+        Overall, we have a O(n) runtime.
+
+    Memory:
+        O(1) since only need ptrs.
+    """
+
+    def findDuplicate(self, nums: List[int]) -> int:
+        slow, fast = 0, 0
+        while True:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+            if slow == fast:
+                break
+
+        slow2 = 0
+        while True:
+            slow = nums[slow]
+            slow2 = nums[slow2]
+            if slow == slow2:
+                return slow
