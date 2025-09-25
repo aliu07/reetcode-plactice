@@ -5,7 +5,7 @@ class ListNode:
         self.next = next
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We will start with a brute force approach. We transform the linked list into
@@ -64,3 +64,69 @@ class Solution:
         curr.next = None
 
         return dummy.next
+
+
+class Solution2:
+    """
+    Intuition:
+
+
+    Runtime:
+        Getting kth node takes at worst O(n).
+
+        Rearranging ptrs takes O(n) too, every node is reversed
+        at most once. Linking groups takes O(1) time.
+
+        Overall O(n) time.
+
+    Memory:
+        O(1) by removing the array and solely maniuplating ptrs.
+    """
+
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        # base cases
+        if not head or k == 1:
+            return head
+
+        # need dummy node to return head
+        # head will change since we are reversing groups
+        dummy = ListNode(0, head)
+        # groupPrev = last node in the previous group
+        groupPrev = dummy
+
+        while True:
+            kth = self.getKth(groupPrev, k)
+
+            # don't have enough remaining nodes to form a k-group
+            if not kth:
+                break
+
+            groupNext = kth.next  # starting node of next group
+
+            # reverse current group
+            #
+            # note how prev is initialized to groupNext
+            # we link current head (which will become last node
+            # once we reverse to the first node of the next group)
+            prev, curr = groupNext, groupPrev.next
+            while curr != groupNext:
+                tmp = curr.next
+                curr.next = prev
+                curr, prev = tmp, curr
+
+            # store first node of current group
+            tmp = groupPrev.next
+            # link last node of prev group to kth node
+            # of current group
+            groupPrev.next = kth
+            # set new groupPrev to last node of current group
+            groupPrev = tmp
+
+        return dummy.next
+
+    def getKth(self, curr, k):
+        while curr and k > 0:
+            curr = curr.next
+            k -= 1
+
+        return curr
