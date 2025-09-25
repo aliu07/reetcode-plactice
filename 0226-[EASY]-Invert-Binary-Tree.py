@@ -6,7 +6,7 @@
 #         self.right = right
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         Use a recursive approach. We process each node and
@@ -32,5 +32,41 @@ class Solution:
         root.left, root.right = root.right, root.left
         self.invertTree(root.left)
         self.invertTree(root.right)
+
+        return root
+
+
+class Solution2:
+    """
+    Intuition:
+        Iterative approach. Use a deque with DFS approach.
+
+    Runtime:
+        O(n) since each node is added to the queue and
+        processed exactly once.
+
+    Memory:
+        We removed the need for a call stack since the
+        solution is not recursive anymore.
+
+        Need O(n) auxiliary space for the deque data struct.
+        Thus, overall O(n) space.
+    """
+
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root:
+            return None
+
+        q = deque([root])
+
+        while q:
+            node = q.pop()
+            node.left, node.right = node.right, node.left
+
+            if node.left:
+                q.append(node.left)
+
+            if node.right:
+                q.append(node.right)
 
         return root
