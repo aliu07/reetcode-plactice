@@ -16,8 +16,17 @@ class Solution:
         in the tree. To do this, we can define a function to compute the
         maximum path of its right and left child recursively.
 
-    Notes:
-        - The diameter does not necessarily include the root!
+        Note that the diameter does not necessarily include the root.
+
+    Runtime:
+        Each node processed once, so O(n) runtime.
+
+    Memory:
+        O(1) auxiliary memory.
+
+        O(n) memory for call stack in worst case if tree is unbalanced.
+
+        Overall O(n) memory.
     """
 
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
