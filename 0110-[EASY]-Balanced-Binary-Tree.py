@@ -6,7 +6,7 @@
 #         self.right = right
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         Recursive approach. At each node, check if each child's
@@ -34,3 +34,59 @@ class Solution:
 
         isBalanced, _ = dfs(root)
         return isBalanced
+
+
+class Solution2:
+    """
+    Intuition:
+        Iterative approach. The idea is the same, but we try simulating
+        the call stack using a stack array within our solution.
+
+    Runtime:
+        Each node requires constant work, so O(n) runtime also.
+
+    Memory:
+        Also O(n) overall since we mirror call stack with a data structure.
+    """
+
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        node = root  # current node
+        last = None  # last fully processed node
+        stack = []  # simulate call stack
+        depths = {}  # { node: depth }
+
+        while stack or node:
+            # travel down left subtree as far as possible
+            if node:
+                stack.append(node)
+                node = node.left
+            # hit bottom of left subtree
+            else:
+                # peeking the top of the stack (potential parent)
+                node = stack[-1]
+
+                # if curr node does not have right child
+                # or right child fully processed
+                if not node.right or node.right == last:
+                    stack.pop()
+
+                    hL = depths.get(node.left, 0)
+                    hR = depths.get(node.right, 0)
+
+                    # check balance
+                    if abs(hL - hR) > 1:
+                        return False
+
+                    # add current node's depth
+                    depths[node] = max(hL, hR) + 1
+
+                    # node is now fully processed
+                    last = node
+                    # set current node to None so we have to pop stack
+                    # on next iter
+                    node = None
+                # right child not fully processed
+                else:
+                    node = node.right
+
+        return True
