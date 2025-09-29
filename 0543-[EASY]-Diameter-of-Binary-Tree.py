@@ -9,7 +9,7 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We essentially need to find the longest path between any 2 nodes
@@ -46,3 +46,60 @@ class Solution:
         findDepth(root)
 
         return self.diameter
+
+
+class Solution2:
+    """
+    Intuition:
+        Iterative approach. We simulate the call stack
+        using the stack data structure.
+
+    Runtime:
+        Same runtime as recursive soln, overall O(n).
+
+    Memory:
+        Call stack simulated by stack array. Overall O(n).
+    """
+
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        node = root  # curr node
+        last = None  # last fully processed node
+        stack = []  # simulate call stack
+        depths = {}  # {node: depth}
+        maxDiam = 0  # result
+
+        while node or stack:
+            # traverse down left subtree
+            if node:
+                stack.append(node)
+                node = node.left
+            # hit end of left subtree
+            else:
+                # peek top of stack
+                node = stack[-1]
+
+                # if peeked node has no right subtree or right subtree already processed
+                if not node.right or last == node.right:
+                    # remove node
+                    stack.pop()
+
+                    # compute diameter
+                    dL = depths.get(node.left, 0)
+                    dR = depths.get(node.right, 0)
+                    currDiam = dL + dR
+
+                    # update max diameter
+                    if currDiam > maxDiam:
+                        maxDiam = currDiam
+
+                    # update depth mapping of current node
+                    depths[node] = max(dL, dR) + 1
+                    # last processed node is now curr node
+                    last = node
+                    # set curr node to None to force stack pop on next iter
+                    node = None
+                else:
+                    # traverse down right subtree
+                    node = node.right
+
+        return maxDiam
