@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
@@ -118,7 +121,7 @@ class Solution2:
             tmp = groupPrev.next
             # link last node of prev group to kth node
             # of current group
-            groupPrev.next = kth
+            groupPrev.next = kth  # type: ignore
             # set new groupPrev to last node of current group
             groupPrev = tmp
 

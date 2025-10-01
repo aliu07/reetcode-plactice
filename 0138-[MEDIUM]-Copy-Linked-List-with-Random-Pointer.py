@@ -1,11 +1,12 @@
-"""
+from typing import Optional
+
+
 # Definition for a Node.
 class Node:
-    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+    def __init__(self, x: int, next: "Optional[Node]" = None, random: "Optional[Node]" = None):
         self.val = int(x)
         self.next = next
         self.random = random
-"""
 
 
 class Solution:
@@ -49,10 +50,10 @@ class Solution:
             # Ptr to copy node
             copy = curr.next
             # Modify random ptr of copy node
-            copy.random = curr.random.next if curr.random else None
+            copy.random = curr.random.next if curr.random else None  # type: ignore
             # Shift curr node ptr
-            curr = curr.next.next
+            curr = curr.next.next  # type: ignore
             # Modify copy node's next ptr
-            copy.next = copy.next.next if copy.next else None
+            copy.next = copy.next.next if copy.next else None  # type: ignore
 
         return res

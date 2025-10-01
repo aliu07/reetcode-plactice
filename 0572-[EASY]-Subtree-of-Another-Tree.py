@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -31,7 +34,7 @@ class Solution:
 
         Here, if tree rooted at 'root' has m nodes and tree rooted at 'subRoot'
         has n nodes, the worst case recursion depth is O(m + n).
-    """"""
+    """
 
     res = False
 

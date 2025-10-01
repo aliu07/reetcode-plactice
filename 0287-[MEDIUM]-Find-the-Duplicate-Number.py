@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution1:
     """
     Intuition:
@@ -19,6 +22,9 @@ class Solution1:
                 return n
 
             seen.add(n)
+
+        # should never reach here
+        return -1
 
 
 class Solution2:
@@ -55,6 +61,9 @@ class Solution2:
                 return abs(n)
 
             nums[ix] *= -1
+
+        # should never reach here
+        return -1
 
 
 class Solution3:
