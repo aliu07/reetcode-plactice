@@ -16,6 +16,12 @@ class Solution:
         We perform a traversal layer by layer. At each layer,
         we append the rightmost element i.e. the last element
         in the queue.
+
+    Runtime:
+        Each node is processed at most once, so O(n) runtime.
+
+    Memory:
+        deque data structure takes at most O(n) memory.
     """
 
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
