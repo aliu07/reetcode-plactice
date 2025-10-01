@@ -6,7 +6,7 @@
 #         self.right = right
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         Build a dictionary where the key is the level and the value
@@ -40,4 +40,41 @@ class Solution:
             dfs(node.right, lvl + 1)
 
         dfs(root, 0)
+        return list(levels.values())
+
+
+class Solution2:
+    """
+    Intuition:
+        Same intuition as Solutin1, except iterative approach.
+
+    Runtime:
+        Each node processed once. O(n) runtime like Solution1.
+
+    Memory:
+        Queue takes up at most O(n) space.
+
+        Dictionary takes up at most O(n) space.
+
+        Overall O(n) memory complexity.
+
+    """
+
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+
+        levels = defaultdict(list)
+        q = deque([(root, 0)])
+
+        while q:
+            node, lvl = q.popleft()
+            levels[lvl].append(node.val)
+
+            if node.left:
+                q.append((node.left, lvl + 1))
+
+            if node.right:
+                q.append((node.right, lvl + 1))
+
         return list(levels.values())
