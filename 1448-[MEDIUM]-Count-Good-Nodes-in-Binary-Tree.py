@@ -9,7 +9,7 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We simply traverse the graph iteratively by storing the node as well as the
@@ -51,3 +51,37 @@ class Solution:
                 q.append((node.right, maxVal))
 
         return numGood
+
+
+class Solution2:
+    """
+    Intuition:
+        Same as Solution1, but with a recursive approach and a non-local
+        instance variable.
+
+    Runtime:
+        O(n) -> each node processed once.
+
+    Memory:
+        Call stack of size O(h) which is O(log n) in best case and O(n)
+        in worst case.
+    """
+
+    def goodNodes(self, root: TreeNode) -> int:
+        self.good = 0
+
+        def dfs(node: TreeNode, maxVal: int) -> None:
+            if not node:
+                return
+
+            if node.val >= maxVal:
+                self.good += 1
+
+            if node.val > maxVal:
+                maxVal = node.val
+
+            dfs(node.left, maxVal)
+            dfs(node.right, maxVal)
+
+        dfs(root, root.val)
+        return self.good
