@@ -19,9 +19,12 @@ class Solution:
         We can also then compute the new maxVal in the path and continue
         until we have processed all nodes in the tree.
 
-    Runtime: O(n) where n is the number of nodes in the tree.
+    Runtime:
+        O(n) where n is the number of nodes in the tree.
 
-    Memory: O(n) where n is the number of nodes in the tree
+    Memory:
+        O(n) where n is the number of nodes in the tree in case of an
+        unbalanced tree.
     """
 
     def goodNodes(self, root: TreeNode) -> int:
