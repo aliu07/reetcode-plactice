@@ -6,7 +6,7 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We can rely on the properties of a BST to reduce our search space.
@@ -39,3 +39,27 @@ class Solution:
             return self.lowestCommonAncestor(root.right, p, q)
         else:
             return root
+
+
+class Solution2:
+    """
+    Intuition:
+        Same idea as Solution1, but written in an iterative manner.
+
+    Runtime:
+        O(h) -> O(log n) best case, O(n) worst case
+
+    Memory:
+        O(h) -> O(log n) best case, O(n) worst case
+    """
+
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+        curr = root
+
+        while True:
+            if max(p.val, q.val) < curr.val:
+                curr = curr.left
+            elif min(p.val, q.val) > curr.val:
+                curr = curr.right
+            else:
+                return curr
