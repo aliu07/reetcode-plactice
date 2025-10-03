@@ -121,7 +121,7 @@ class Solution2:
             tmp = groupPrev.next
             # link last node of prev group to kth node
             # of current group
-            groupPrev.next = kth  # type: ignore
+            groupPrev.next = kth
             # set new groupPrev to last node of current group
             groupPrev = tmp
 

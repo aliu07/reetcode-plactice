@@ -52,17 +52,17 @@ class Solution:
             node = stack.pop()
 
             if node.left:
-                parent_map[node.left] = node  # type: ignore
+                parent_map[node.left] = node
                 stack.append(node.left)
 
             if node.right:
-                parent_map[node.right] = node  # type: ignore
+                parent_map[node.right] = node
                 stack.append(node.right)
 
         ancestors_p = set()
         while p:
             ancestors_p.add(p)
-            p = parent_map[p]  # type: ignore
+            p = parent_map[p]
 
         while q not in ancestors_p:
             q = parent_map[q]

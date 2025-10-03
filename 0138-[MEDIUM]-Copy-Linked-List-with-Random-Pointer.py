@@ -50,10 +50,10 @@ class Solution:
             # Ptr to copy node
             copy = curr.next
             # Modify random ptr of copy node
-            copy.random = curr.random.next if curr.random else None  # type: ignore
+            copy.random = curr.random.next if curr.random else None
             # Shift curr node ptr
-            curr = curr.next.next  # type: ignore
+            curr = curr.next.next
             # Modify copy node's next ptr
-            copy.next = copy.next.next if copy.next else None  # type: ignore
+            copy.next = copy.next.next if copy.next else None
 
         return res
