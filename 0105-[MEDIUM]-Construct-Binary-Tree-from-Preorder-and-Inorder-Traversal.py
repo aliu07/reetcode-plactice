@@ -9,7 +9,7 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         For the preorder array, we know that the first element is the immediate
@@ -56,3 +56,58 @@ class Solution:
         root.right = self.buildTree(preorder[mid + 1 :], inorder[mid + 1 :])
 
         return root
+
+
+class Solution2:
+    """
+    Intuition:
+        We use the same recursive approach as before, but introduce
+        two key optimizations to achieve linear runtime.
+
+        First, we build a hashmap to store each value’s index in the
+        inorder array, allowing O(1) lookups instead of scanning for
+        the root’s position each time.
+
+        Second, we avoid costly list slicing by using left and right
+        index bounds (l, r) to represent the current inorder subarray.
+        This way, recursion operates directly on index ranges while
+        a single preorder pointer (self.preIx) tracks the current root
+        node across calls.
+
+    Runtime:
+        One pass over elmts in the arrays -> O(n).
+
+        Removed the extra factor of n by using hashmap to store indices.
+
+        Also removed extra factor of n by using l, r bounds instead of
+        slicing subarrays.
+
+        Overall O(n).
+
+    Memory:
+        O(n) for hashmap.
+
+        O(h) for call stack -> O(n) worst case with unbalanced tree.
+
+        Overall, still O(n).
+    """
+
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        self.preIx = 0
+        indices = {val: ix for ix, val in enumerate(inorder)}
+
+        def dfs(l, r):
+            if l > r:
+                return None
+
+            root = TreeNode(preorder[self.preIx])
+            self.preIx += 1
+
+            mid = indices[root.val]
+
+            root.left = dfs(l, mid - 1)
+            root.right = dfs(mid + 1, r)
+
+            return root
+
+        return dfs(0, len(preorder) - 1)
