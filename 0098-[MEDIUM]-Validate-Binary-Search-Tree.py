@@ -1,5 +1,6 @@
 from typing import Optional
 from math import inf
+from collections import deque
 
 
 # Definition for a binary tree node.
@@ -10,7 +11,7 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We can reason each node as having a left and right bound. The
@@ -56,3 +57,36 @@ class Solution:
             return dfs(node.left, l, node.val) and dfs(node.right, node.val, r)
 
         return dfs(root, -inf, inf)
+
+
+class Solution2:
+    """
+    Intuition:
+        Same idea as Solution1, but with an iterative approach.
+
+    Runtime:
+        Same as Solution1.
+
+    Memory:
+        Same as Solution1. deque 'simulates' call stack.
+    """
+
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        if not root:
+            return False
+
+        q = deque([(root, -inf, inf)])
+
+        while q:
+            node, l, r = q.pop()
+
+            if node.val <= l or node.val >= r:
+                return False
+
+            if node.left:
+                q.append((node.left, l, node.val))
+
+            if node.right:
+                q.append((node.right, node.val, r))
+
+        return True
