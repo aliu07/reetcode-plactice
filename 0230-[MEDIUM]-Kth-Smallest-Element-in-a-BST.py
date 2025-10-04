@@ -89,3 +89,40 @@ class Solution2:
 
         dfs(root)
         return self.res
+
+
+class Solution3:
+    """
+    Intuition:
+        Same idea as Solution1, but we use an iterative approach with an array
+        to simulate the call stack while still respecting an in order traversal.
+
+    Runtime:
+        O(n) -> same as Solution1 (consider the case where k == number of nodes
+        in tree).
+
+    Memory:
+        O(n) -> same as Solution1, stack array can be linear if tree is unbalanced.
+    """
+
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        node = root
+        stack = []
+
+        while True:
+            # traverse left until hit a dead end
+            if node:
+                stack.append(node)
+                node = node.left
+            # in order processing
+            else:
+                node = stack.pop()
+
+                k -= 1
+                if k == 0:
+                    return node.val
+
+                if node.right:
+                    node = node.right
+                else:
+                    node = None
