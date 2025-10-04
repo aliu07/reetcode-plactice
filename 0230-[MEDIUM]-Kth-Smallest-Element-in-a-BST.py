@@ -9,7 +9,7 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We somehow want to build the sorted order of the BST so that
@@ -45,3 +45,47 @@ class Solution:
 
         dfs(root)
         return inOrder[k - 1]
+
+
+class Solution2:
+    """
+    Intuition:
+        We can make our algorithm slightly more memory efficient by
+        removing the inOrder array.
+
+        Instead, we store k in a nonlocal var and decrement it. Once
+        it hits 0, we know we hit our kth smallest elmt so that beocmes
+        our result.
+
+        This solution still takes a recursive approach.
+
+    Runtime:
+        O(n) -> same as Solution1.
+
+    Memory:
+        Removed the need for the array, but call stack is still
+        O(n) in the worst case.
+
+        Overall, O(n) memory.
+
+    """
+
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        self.res = 0
+        self.k = k
+
+        # in order traversal
+        def dfs(node: Optional[TreeNode]) -> None:
+            if not node:
+                return
+
+            dfs(node.left)
+
+            self.k -= 1
+            if self.k == 0:
+                self.res = node.val
+
+            dfs(node.right)
+
+        dfs(root)
+        return self.res
