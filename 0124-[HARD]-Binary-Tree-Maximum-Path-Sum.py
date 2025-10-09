@@ -10,7 +10,7 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         The maximum path sum can be found by considering all possible combinations
@@ -66,3 +66,33 @@ class Solution:
 
         dfs(root)
         return int(self.maxSum)
+
+
+class Solution2:
+    """
+    Intuition:
+        Same intuition as Solution1, but with a more concise & polished implementation.
+
+    Runtime:
+        Same as Solution1.
+
+    Memory:
+        Same as Solution1.
+    """
+
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        self.maxSum = root.val
+
+        def dfs(node):
+            if not node:
+                return 0
+
+            left = max(dfs(node.left), 0)
+            right = max(dfs(node.right), 0)
+            path = left + node.val + right
+
+            self.maxSum = max(self.maxSum, path)
+            return node.val + max(left, right)
+
+        dfs(root)
+        return self.maxSum
