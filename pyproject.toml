@@ -16,3 +16,4 @@ reportOptionalMemberAccess = false
 reportArgumentType = false
 reportAssignmentType = false
 reportReturnType = false
+reportAttributeAccessIssue = false
