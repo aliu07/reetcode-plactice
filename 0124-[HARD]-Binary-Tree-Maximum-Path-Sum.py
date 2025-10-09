@@ -96,3 +96,53 @@ class Solution2:
 
         dfs(root)
         return self.maxSum
+
+
+class Solution3:
+    """
+    Intuition:
+        Same as Solution1. Iterative DFS approach.
+
+    Runtime:
+        Same as Solution1. O(n) time.
+
+    Memory:
+        Same as Solution1. O(n) space. Only difference is we mimic
+        call stack with an array stack.
+    """
+
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        res = root.val
+        maxPaths = {}
+
+        node = root
+        last = None
+        stack = []
+
+        while stack or node:
+            # go left
+            if node:
+                stack.append(node)
+                node = node.left
+            # hit bottom
+            else:
+                node = stack[-1]
+
+                if not node.right or node.right == last:
+                    stack.pop()
+
+                    left = max(maxPaths.get(node.left, 0), 0)
+                    right = max(maxPaths.get(node.right, 0), 0)
+                    path = left + node.val + right
+
+                    if path > res:
+                        res = path
+
+                    maxPaths[node] = node.val + max(left, right)
+
+                    last = node
+                    node = None
+                else:
+                    node = node.right
+
+        return res
