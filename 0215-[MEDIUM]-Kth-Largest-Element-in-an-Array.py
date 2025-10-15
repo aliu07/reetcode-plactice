@@ -8,18 +8,30 @@ class Solution1:
     Intuition:
         Can't use sorting, so build a max-heap. Then, we pop k-1
         elements to get the kth largest element.
+
+    Runtime:
+        Building heap takes O(n log n) since we go through all
+        numbers in the array.
+
+        Then, popping k - 1 elmts takes O((k - 1) log n).
+
+        Overall, we have a O(n log n) runtime.
+
+    Memory:
+        Heap contains all elements before popping k - 1 elmts, so
+        O(n).
     """
 
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        heap = []
+        maxHeap = []
 
         for num in nums:
-            heapq.heappush(heap, -num)
+            heapq.heappush(maxHeap, -num)
 
         for i in range(k - 1):
-            heapq.heappop(heap)
+            heapq.heappop(maxHeap)
 
-        return -heap[0]
+        return -maxHeap[0]
 
 
 class Solution2:
