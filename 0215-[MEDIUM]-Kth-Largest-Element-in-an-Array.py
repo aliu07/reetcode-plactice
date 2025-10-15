@@ -89,9 +89,22 @@ class Solution3:
         at by minVal as well when building the frequency list. Also, we need
         to offset the result index.
 
-    Notes:
         There exists another solution with similar runtime, but it is more
         esoteric.
+
+    Runtime:
+        O(n) to find minVal and maxVal.
+
+        O(R) to allocate freq array where R is the range of values.
+
+        O(n) to populate freq array.
+
+        O(R) to iterate over the freq array to find the kth largest elmt.
+
+        Overall runtime is O(n + R).
+
+    Memory:
+        freq array takes O(R) memory.
     """
 
     def findKthLargest(self, nums: List[int], k: int) -> int:
