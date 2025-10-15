@@ -1,9 +1,9 @@
 from typing import List
-from collections import deque
+from collections import deque, Counter
 import heapq
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         Intuitively, we know that we have to start by processing
@@ -64,3 +64,58 @@ class Solution:
                 heapq.heappush(maxHeap, f)
 
         return time
+
+
+class Solution2:
+    """
+    Intuition:
+        The task with the highest freq determines the minimum possible
+        schedule length because it will need the most idle time to
+        satisfy the cooldown constraint.
+
+        Considering this, we can create 'cycles' of processing the most
+        frequent task and then waiting (can be processing other tasks or
+        simply idling) for n clock cycles. This gives us a cycle length
+        of n + 1 (waiting + processing the most frequent task itself).
+
+        We have the max frequency and a cycle length of n + 1, so we can
+        multiply these two to get the minimum amount of time needed. Note
+        that the last occurrence of the most frequent task does not need
+        trailing slots, so the factor is only (maxFreq - 1).
+
+        If there are multiple tasks with frequence maxFreq, then they all
+        need to be placed in these intervals. They also will need to be
+        appended on the last occurrence which explains the addition.
+
+        Lastly, consider the case where the cooldown is 1 and each task
+        has the same frequence of 1000. Since you can't finish faster than
+        the number of tasks, we need to return the max between the time
+        we obtained from our calculations and the number of tasks at hand.
+
+    Runtime:
+        O(n) to compute counts and find maxFreq.
+
+        O(26) to find other tasks with frequency = maxFreq which
+        simplifies to O(1).
+
+        Overall O(n) runtime.
+
+    Memory:
+        O(1) since we have at most 26 letters.
+    """
+
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        c = Counter(tasks)
+        maxFreq = max(c.values())
+
+        # by processing most frequent task first
+        time = (maxFreq - 1) * (n + 1)
+
+        # accounting for other tasks with frequency = maxFreq as well
+        cnt = 0
+        for t, f in c.items():
+            if f == maxFreq:
+                cnt += 1
+
+        time += cnt
+        return max(time, len(tasks))
