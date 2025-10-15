@@ -37,22 +37,32 @@ class Solution1:
 class Solution2:
     """
     Intuition:
-        Same idea as solution 1, but written more elegantly.
-        Just maintain a min-heap of size k instead of fitting
-        all elements into the heap first and then finding the
-        kth largest element.
+        Instead of a max heap, we maintain a min heap of size
+        k. We iterate through every elmt in nums and adjust
+        our heap accordingly.
+
+    Runtime:
+        The push/pop operations take O(log k) time. We do this
+        for each elmt in nums, so overall we have O(n log k).
+
+        This runtime is better than Solution1's since we reduce
+        the size of our heap from n to k.
+
+    Memory:
+        Heap bounded at size k, so O(k). This is better than
+        Solution1's O(n) memory complexity.
     """
 
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        heap = []
+        minHeap = []
 
-        for num in nums:
-            heapq.heappush(heap, num)
+        for n in nums:
+            heapq.heappush(minHeap, n)
 
-            if len(heap) > k:
-                heapq.heappop(heap)
+            if len(minHeap) > k:
+                heapq.heappop(minHeap)
 
-        return heap[0]
+        return minHeap[0]
 
 
 class Solution3:
