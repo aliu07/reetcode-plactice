@@ -102,3 +102,61 @@ class Solution2:
 
         dfs(0, [], 0)
         return res
+
+
+class Solution3:
+    """
+    Intuition:
+        We introduce 2 more optimizations.
+
+        Instead of building a new list at each recursive step, we can modify
+        the current list in place by appending and popping elements.
+
+        The second optimization lies in the branching strategy. Rather than
+        treating each recursion as a binary choice (take or skip), we loop
+        through all valid candidates starting from the current index. This
+        eliminates redundant recursive calls and leverages the sorted `nums`
+        array to terminate early when the remaining target cannot be reached.
+
+        Example redundant call:
+            nums = [2, 3, 4]
+
+            We want to build the combination [2, 4]
+
+            Using Solution2, we would need a recursive call to take 2, another
+            to skip 3, and another to take 4.
+
+            Using this approach, we need a recursive call to take 2 and from 2,
+            we can directly loop to 4 instead of having to need an extra recursive
+            call to skip 3.
+
+    Runtime:
+        We removed the redundant recursive calls, but we are still simulating a
+        binary choice of choosing or skipping each number. Thus, the time complexity
+        is the same as Solution2, O(2^t).
+
+    Memory:
+        The call stack takes O(h) where h is the height of the recursion tree.
+        In the worst case, we can have a combination of length target (if nums
+        contains 1). Therefore, the overall memory complexity is O(target).
+    """
+
+    def combinationSum(self, nums: List[int], target: int) -> List[List[int]]:
+        res = []
+        nums.sort()
+
+        def dfs(startIx, currNums, currSum):
+            if currSum == target:
+                res.append(currNums.copy())
+                return
+
+            for k in range(startIx, len(nums)):
+                if currSum + nums[k] > target:
+                    return
+
+                currNums.append(nums[k])
+                dfs(k, currNums, currSum + nums[k])
+                currNums.pop()
+
+        dfs(0, [], 0)
+        return res
