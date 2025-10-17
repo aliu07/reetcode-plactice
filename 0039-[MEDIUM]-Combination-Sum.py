@@ -10,17 +10,18 @@ class Solution1:
         sum exceeds target, we backtrack.
 
     Runtime:
-        Let n be the length of nums and t be the target value.
+        Let n be the length of nums, t be the target value, and m be the minimum
+        value in nums.
 
-        In the worst case, we can have a combination of length t (if nums contains
-        1). At each step, we have n choices (the numbers in nums). Therefore, the
-        time complexity is O(n^t) since we have n branches at each recursive step
-        and the depth is at most t.
+        In the worst case, we can have a combination of length t/m. At each step,
+        we have n choices (the numbers in nums). Therefore, the time complexity
+        is O(n^(t/m)) since we have n branches at each recursive step and the
+        depth is at most t/m.
 
     Memory:
         The call stack takes O(h) where h is the height of the recursion tree. We
-        mentioneed this value to be t previously, so the overall memory complexity
-        is O(t).
+        mentioneed this value to be t/m previously, so the overall memory complexity
+        is O(t/m).
     """
 
     def combinationSum(self, nums: List[int], target: int) -> List[List[int]]:
@@ -68,18 +69,18 @@ class Solution2:
         - Skip it and move onto the next number by incrementing the start index.
 
     Runtime:
-        Our longest combination can be of length target (combination of all 1's).
+        Our longest combination can be of length t/m where t is target.
 
         At each recursive step, we are presented with 2 options. Given that the
-        longest combination is of length target, the time complexity is O(2^t).
+        longest combination is of length target, the time complexity is O(2^(t/m)).
 
-        This is better than O(n^t) from Solution1 since we reduced n choices to
+        This is better than O(n^(t/m)) from Solution1 since we reduced n choices to
         2.
 
     Memory:
         The call stack takes O(h) where h is the height of the recursion tree.
-        In the worst case, we can have a combination of length target (if nums
-        contains 1). Therefore, the overall memory complexity is O(target).
+        In the worst case, we can have a combination of length t/m. Therefore,
+        the overall memory complexity is O(t/m).
     """
 
     def combinationSum(self, nums: List[int], target: int) -> List[List[int]]:
@@ -133,12 +134,12 @@ class Solution3:
     Runtime:
         We removed the redundant recursive calls, but we are still simulating a
         binary choice of choosing or skipping each number. Thus, the time complexity
-        is the same as Solution2, O(2^t).
+        is the same as Solution2, O(2^(t/m)).
 
     Memory:
         The call stack takes O(h) where h is the height of the recursion tree.
-        In the worst case, we can have a combination of length target (if nums
-        contains 1). Therefore, the overall memory complexity is O(target).
+        In the worst case, we can have a combination of length t/m. Therefore,
+        the overall memory complexity is O(t/m).
     """
 
     def combinationSum(self, nums: List[int], target: int) -> List[List[int]]:
