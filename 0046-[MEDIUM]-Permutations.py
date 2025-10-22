@@ -1,7 +1,7 @@
 from typing import List
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We can use DFS to backtrack.
@@ -44,4 +44,39 @@ class Solution:
                     curr.pop()
 
         dfs([])
+        return res
+
+
+class Solution2:
+    """
+    Intuition:
+        Same as Solution1.
+
+        We propose a slight optimization. Instead of searching through all
+        numbers (which is not a big search space, max 6...), we can keep
+        track of remaining numbers to add to our permutation. This way, we
+        can directly iterate through only the valid candidates at each step.
+
+    Runtime:
+        Same as Solution1.
+
+    Memory:
+        Same as Solution1.
+    """
+
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []
+
+        def dfs(curr, remaining):
+            if not remaining:
+                res.append(curr.copy())
+
+            for n in remaining.copy():
+                remaining.remove(n)
+                curr.append(n)
+                dfs(curr, remaining)
+                remaining.append(n)
+                curr.pop()
+
+        dfs([], nums)
         return res
