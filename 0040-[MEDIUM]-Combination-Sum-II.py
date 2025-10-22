@@ -1,7 +1,7 @@
 from typing import List
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We use DFS backtracking to sovle this problem. Unlike the previous
@@ -53,6 +53,55 @@ class Solution:
             while ix + 1 < len(candidates) and candidates[ix] == candidates[ix + 1]:
                 ix += 1
             dfs(ix + 1, currComb, currSum)
+
+        dfs(0, [], 0)
+        return res
+
+
+class Solution2:
+    """
+    Intuition:
+        Same overall intuition as Solution1. We simplify the logic for skippig
+        duplicates and breaking early upon encountering an element that makes
+        our combintion exceed the target by handling it in the for loop.
+
+    Runtime:
+        Still a binary decision tree, so O(2^n).
+
+        Copying combinations takes at most O(n) time.
+
+        Overall still O(n * 2^n) time.
+
+    Memory:
+        Call stack depth is at most O(n).
+
+        Combination storage also at most O(n).
+
+        Overall O(n) space.
+    """
+
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()
+        res = []
+
+        def dfs(ix, currComb, currSum):
+            # found a combination
+            if currSum == target:
+                res.append(currComb.copy())
+                return
+
+            for j in range(ix, len(candidates)):
+                # skip duplicates
+                if j > ix and candidates[j] == candidates[j - 1]:
+                    continue
+
+                # exceeds target, we can exit at this point
+                if currSum + candidates[j] > target:
+                    break
+
+                currComb.append(candidates[j])  # pick curr elmt
+                dfs(j + 1, currComb, currSum + candidates[j])  # continue exploring at next elmt
+                currComb.pop()  # backtrack
 
         dfs(0, [], 0)
         return res
