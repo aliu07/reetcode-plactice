@@ -1,7 +1,7 @@
 from typing import List
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         Brute force approach would maintain a set of subsets. We
@@ -51,6 +51,37 @@ class Solution:
             while ix + 1 < len(nums) and nums[ix] == nums[ix + 1]:
                 ix += 1
             dfs(ix + 1, curr)  # keep exploring
+
+        nums.sort()
+        dfs(0, [])
+        return res
+
+
+class Solution2:
+    """
+    Intuition:
+        Same as Solution1. Just rewritten in a different manner.
+
+    Runtime:
+        Same as Solution1.
+
+    Memory:
+        Same as Solution1.
+    """
+
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        res = []
+
+        def dfs(ix, curr):
+            res.append(curr.copy())
+
+            for j in range(ix, len(nums)):
+                if j > ix and nums[j] == nums[j - 1]:
+                    continue
+
+                curr.append(nums[j])
+                dfs(j + 1, curr)
+                curr.pop()
 
         nums.sort()
         dfs(0, [])
