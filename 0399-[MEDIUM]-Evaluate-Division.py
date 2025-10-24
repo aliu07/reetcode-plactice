@@ -53,7 +53,9 @@ class Solution:
         Overall, the memory complexity is bounded by O(V + E).
     """
 
-    def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
+    def calcEquation(
+        self, equations: List[List[str]], values: List[float], queries: List[List[str]]
+    ) -> List[float]:
         # Step 1. Build adjacency list
         adj = defaultdict(list)
 

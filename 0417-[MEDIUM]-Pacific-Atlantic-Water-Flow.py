@@ -41,7 +41,12 @@ class Solution:
             for dr, dc in dirs:
                 new_r, new_c = row + dr, col + dc
 
-                if 0 <= new_r < M and 0 <= new_c < N and height <= heights[new_r][new_c] and not atlantic[new_r][new_c]:
+                if (
+                    0 <= new_r < M
+                    and 0 <= new_c < N
+                    and height <= heights[new_r][new_c]
+                    and not atlantic[new_r][new_c]
+                ):
                     q.append((heights[new_r][new_c], new_r, new_c))
 
         # Process Pacific
@@ -62,7 +67,12 @@ class Solution:
             for dr, dc in dirs:
                 new_r, new_c = row + dr, col + dc
 
-                if 0 <= new_r < M and 0 <= new_c < N and height <= heights[new_r][new_c] and not pacific[new_r][new_c]:
+                if (
+                    0 <= new_r < M
+                    and 0 <= new_c < N
+                    and height <= heights[new_r][new_c]
+                    and not pacific[new_r][new_c]
+                ):
                     q.append((heights[new_r][new_c], new_r, new_c))
 
         # Compute res
