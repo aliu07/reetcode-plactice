@@ -1,7 +1,7 @@
 from typing import List
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We use a DFS approach to model our binary decision tree. At each
@@ -59,7 +59,20 @@ class Solution:
         return res
 
 
-class Solution:
+class Solution2:
+    """
+    Intuition:
+        Same as Solution1. However, we can make the code more compact and
+        merge our two cases (single char vs palindrome) into one by
+        realizing that a single character is in fact a palindrome also.
+
+    Runtime:
+        Same as Solution1.
+
+    Memory:
+        Same as Solution1.
+    """
+
     def partition(self, s: str) -> List[List[str]]:
         res = []
 
