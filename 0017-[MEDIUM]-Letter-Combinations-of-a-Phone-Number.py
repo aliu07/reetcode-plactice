@@ -1,7 +1,8 @@
+from collections import deque
 from typing import List
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         Recursive DFS. At each step, we can choose out of all the characters
@@ -55,4 +56,47 @@ class Solution:
                 curr.pop()
 
         dfs(0, [])
+        return res
+
+
+class Solution2:
+    """
+    Intuition:
+        Same as Solution1. Iterative instead of recursive.
+
+    Runtime:
+        Same as Solution1.
+
+    Memory:
+        Same as Solution1.
+    """
+
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+
+        digitMap = {
+            "2": "abc",
+            "3": "def",
+            "4": "ghi",
+            "5": "jkl",
+            "6": "mno",
+            "7": "pqrs",
+            "8": "tuv",
+            "9": "wxyz",
+        }
+
+        res = []
+        q = deque([(0, "")])
+
+        while q:
+            ix, curr = q.pop()
+
+            if len(curr) == len(digits):
+                res.append(curr)
+                continue
+
+            for c in digitMap[digits[ix]]:
+                q.append((ix + 1, curr + c))
+
         return res
