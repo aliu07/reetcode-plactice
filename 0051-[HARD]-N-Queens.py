@@ -154,3 +154,52 @@ class Solution2:
 
         dfs(0)
         return res
+
+
+class Solution:
+    """
+    Intuition:
+        Same as Solution1, but we remove the need for a helper function
+        to validate a queen's placement by simply hashing populated columns
+        and diagonals.
+
+    Runtime:
+        Same upper bound as Solution1, but we remove the factor linked to
+        the helper function to validate the new queen's placement.
+
+    Memory:
+        Same as Solution1. We removed the deque, but we have sets now.
+    """
+
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        res = []
+        board = [["."] * n for _ in range(n)]
+
+        cols = set()
+        posDiag = set()
+        negDiag = set()
+
+        def dfs(currRow):
+            if currRow == n:
+                soln = ["".join(r) for r in board]
+                res.append(soln)
+                return
+
+            for c in range(n):
+                if c in cols or (currRow + c) in posDiag or (currRow - c) in negDiag:
+                    continue
+
+                board[currRow][c] = "Q"  # place queen
+                cols.add(c)
+                posDiag.add(currRow + c)
+                negDiag.add(currRow - c)
+
+                dfs(currRow + 1)
+
+                board[currRow][c] = "."  # pick up queen
+                cols.remove(c)
+                posDiag.remove(currRow + c)
+                negDiag.remove(currRow - c)
+
+        dfs(0)
+        return res
