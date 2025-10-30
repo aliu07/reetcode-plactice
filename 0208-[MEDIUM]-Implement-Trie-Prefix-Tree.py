@@ -1,9 +1,3 @@
-class TrieNode:
-    def __init__(self):
-        self.children = [None] * 26
-        self.isEndOfWord = False
-
-
 class Trie1:
     """
     Intuition:
@@ -20,17 +14,20 @@ class Trie1:
         where we don't care if the word ends or not so long as the sequence
         exists in the Trie.
 
-    Runtime: O(n) for inserts and lookups
+    Runtime:
+        O(n) for inserts and lookups
 
-    Memory: O(n) where n is the total number of words
-
-    Notes:
-        Instead of creating a class to represent the TrieNodes, we can accelerate
-        runtime by using a native dictionary. See Trie2.
+    Memory:
+        O(n) where n is the total number of words
     """
 
+    class TrieNode:
+        def __init__(self):
+            self.children = [None] * 26
+            self.isEndOfWord = False
+
     def __init__(self):
-        self.root = TrieNode()
+        self.root = self.TrieNode()
 
     def insert(self, word: str) -> None:
         curr = self.root
@@ -39,7 +36,7 @@ class Trie1:
             ix = ord(c) - ord("a")
 
             if not curr.children[ix]:
-                curr.children[ix] = TrieNode()
+                curr.children[ix] = self.TrieNode()
 
             curr = curr.children[ix]
 
@@ -78,6 +75,12 @@ class Trie:
     Intuition:
         Same as Trie1, except with dictionaries instead of custom class.
         We also use special character to encode the isEndOfWord boolean.
+
+    Runtime:
+        Same as Solution1.
+
+    Memory:
+        Same as Solution1.
     """
 
     def __init__(self):
