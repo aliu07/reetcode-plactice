@@ -2,7 +2,7 @@ from collections import deque
 from typing import List
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         Our approach relies on placing a queen at each cell in a row and
@@ -68,6 +68,72 @@ class Solution:
 
                     # keep exploring
                     q.append((r + dr, c + dc, (dr, dc)))
+
+            return True
+
+        def dfs(currRow):
+            if currRow == n:
+                soln = ["".join(r) for r in board]
+                res.append(soln)
+                return
+
+            for col in range(n):
+                board[currRow][col] = "Q"  # place queen
+
+                # check if newly placed queen is safe
+                if queenIsSafe(currRow, col):
+                    dfs(currRow + 1)
+
+                board[currRow][col] = "."  # pick up queen
+
+        dfs(0)
+        return res
+
+
+class Solution2:
+    """
+    Intuition:
+        Same as Solution1.
+
+        We modified the helper function validating the new queen's placement. Instead
+        of checking all rows and diagonals, we know that we only need to validate
+        against queens that have already been placed.
+
+        As such, we only need to check preceding rows and diagonals.
+
+    Runtime:
+        Same as Solution1.
+
+    Memory:
+        Same as Solution1.
+    """
+
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        res = []
+        board = [["."] * n for _ in range(n)]
+
+        def queenIsSafe(row, col):
+            # we place queens by row, so only need to check
+            # cols and diagonals
+            r = row - 1
+            while r >= 0:
+                if board[r][col] == "Q":
+                    return False
+                r -= 1
+
+            r, c = row - 1, col - 1
+            while r >= 0 and c >= 0:
+                if board[r][c] == "Q":
+                    return False
+                r -= 1
+                c -= 1
+
+            r, c = row - 1, col + 1
+            while r >= 0 and c < n:
+                if board[r][c] == "Q":
+                    return False
+                r -= 1
+                c += 1
 
             return True
 
