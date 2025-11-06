@@ -1,3 +1,4 @@
+from collections import deque
 from typing import Optional
 
 
@@ -8,7 +9,7 @@ class Node:
         self.neighbors = neighbors if neighbors is not None else []
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We can store a map where the original node is the key
@@ -56,3 +57,38 @@ class Solution:
             return clone
 
         return dfs(node) if node else None
+
+
+class Solution2:
+    """
+    Intuition:
+        Same as Solution1. Instead, we use iterative BFS approach.
+
+    Runtime:
+        Same as Solution1.
+
+    Memory:
+        Same as Solution1.
+    """
+
+    def cloneGraph(self, node: Optional["Node"]) -> Optional["Node"]:
+        if not node:
+            return None
+
+        cloneMap = {}
+        cloneMap[node] = Node(node.val)
+
+        q = deque([node])
+        while q:
+            for _ in range(len(q)):
+                curr = q.popleft()
+                clone = cloneMap[curr]
+
+                for nei in curr.neighbors:
+                    if nei not in cloneMap:
+                        cloneMap[nei] = Node(nei.val)
+                        q.append(nei)
+
+                    clone.neighbors.append(cloneMap[nei])
+
+        return cloneMap[node]
