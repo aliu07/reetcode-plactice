@@ -1,8 +1,9 @@
-from typing import List
 from collections import deque
+from math import inf
+from typing import List
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         Instead of starting from the middle and checking if each cell can
@@ -80,6 +81,73 @@ class Solution:
         for r in range(M):
             for c in range(N):
                 if atlantic[r][c] and pacific[r][c]:
+                    res.append([r, c])
+
+        return res
+
+
+class Solution2:
+    """
+    Intuition:
+        Same as Solution1. Instead of processing Atlantic, then
+        Pacific in a sequential manner, we can process both in
+        the same loop to save a tiny bit of runtime.
+
+    Runtime:
+        Same as Solution1.
+
+    Memory:
+        Same as Solution1.
+    """
+
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        M, N = len(heights), len(heights[0])
+        dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+        pacific = [[False] * N for _ in range(M)]
+        atlantic = [[False] * N for _ in range(M)]
+        pacQ = deque()
+        atlQ = deque()
+
+        # init qs
+        for r in range(M):
+            pacQ.append((r, -1, -inf))
+            atlQ.append((r, N, -inf))
+        for c in range(N):
+            pacQ.append((-1, c, -inf))
+            atlQ.append((M, c, -inf))
+
+        # bfs on both at same time
+        while pacQ or atlQ:
+            for _ in range(len(pacQ)):
+                r, c, h = pacQ.popleft()
+
+                for dr, dc in dirs:
+                    nr, nc = r + dr, c + dc
+
+                    if 0 <= nr < M and 0 <= nc < N and not pacific[nr][nc] and heights[nr][nc] >= h:
+                        pacific[nr][nc] = True
+                        pacQ.append((nr, nc, heights[nr][nc]))
+
+            for _ in range(len(atlQ)):
+                r, c, h = atlQ.popleft()
+
+                for dr, dc in dirs:
+                    nr, nc = r + dr, c + dc
+
+                    if (
+                        0 <= nr < M
+                        and 0 <= nc < N
+                        and not atlantic[nr][nc]
+                        and heights[nr][nc] >= h
+                    ):
+                        atlantic[nr][nc] = True
+                        atlQ.append((nr, nc, heights[nr][nc]))
+
+        res = []
+        for r in range(M):
+            for c in range(N):
+                if pacific[r][c] and atlantic[r][c]:
                     res.append([r, c])
 
         return res
