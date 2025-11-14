@@ -1,8 +1,8 @@
-from typing import List
 from collections import deque
+from typing import List
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We can use BFS/DFS to traverse all the nodes and edges. We just need to keep
@@ -45,3 +45,57 @@ class Solution:
                     q.append((node, nei))
 
         return len(seen) == n
+
+
+class Solution2:
+    """
+    Intuition:
+        Same as Solution1. Except, we can save compute and introduce
+        a check for the condition that a tree must have V - 1 edges
+        where V is the number of vertices.
+
+    Runtime:
+        Let V be the number of nodes and E be the number of edges.
+
+        Building adjacency list takes O(E) time.
+
+        DFS Takes O(V + E) time.
+
+        Overall O(V + E) time.
+
+    Memory:
+        Let V be the number of nodes and E be the number of edges.
+
+        Adjacency list takes O(V + E) space... O(n^2) in connected
+        graph.
+
+        Deque takes at most O(V) space.
+
+        Overall O(V + E) space.
+    """
+
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        if len(edges) != n - 1:
+            return False
+
+        adj = [[] for _ in range(n)]
+        for a, b in edges:
+            adj[a].append(b)
+            adj[b].append(a)
+
+        q = deque([(None, 0)])
+        seen = set()
+
+        while q:
+            parent, node = q.pop()
+
+            if node in seen:
+                return False
+
+            seen.add(node)
+
+            for nei in adj[node]:
+                if nei != parent:
+                    q.append((node, nei))
+
+        return False if len(seen) != n else True
