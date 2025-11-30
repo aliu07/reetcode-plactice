@@ -1,9 +1,10 @@
+import heapq
 from collections import deque
 from math import inf
 from typing import List
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We start by building an adjancency list of our edges. Then, we
@@ -63,6 +64,76 @@ class Solution:
                 # i.e. current time was a minimum
                 for nei, delay in adj[node]:
                     q.append((nei, time + delay))
+
+        # compute result
+        res = max(times)
+        return res if res != inf else -1
+
+
+class Solution2:
+    """
+    Intuition:
+        Instead of relaxing edges multiple times (i.e. finding a better
+        path multiple times), we can guarantee that every edge only gets
+        relaxed once by using a min heap instead of a deque (modelled as
+        a stack for DFS). This way, we guarantee we are always exploring
+        the minimum cost path by popping the root of the min heap (greedy).
+
+        This is the idea behind Dijkstra's Algorithm, which is used to find
+        the min-path from one node to every other node in a graph.
+
+    Runtime:
+        Building the adjacency list still takes O(E).
+
+        Using the min-heap, we relax every edge only once. When we relax
+        it, we push onto the heap which costs O(log V). Since we have E
+        edges, this leads to O(E * log V) time.
+
+        Finding the highest delay takes O(V) time.
+
+        Overall, we have O(E * log V) time.
+
+    Memory:
+        Adjacency list takes O(E) space.
+
+        Priority queueu (min heap) can hold at most all nodes before we
+        pop anything, so O(V).
+
+        'times' array takes O(V) space.
+
+        Overall, same O(V + E) space complexity as Solution1.
+    """
+
+    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+        # build adj list with weights/delays
+        adj = [[] for _ in range(n + 1)]
+        for u, v, delay in times:
+            adj[u].append((v, delay))
+
+        # init
+        pQ = []
+        heapq.heappush(pQ, (0, k))
+        # keep track of min time to reach each node from k
+        times = [inf] * (n + 1)
+        times[0] = 0  # index 0 is tombstone since nodes are 1-indexed
+        times[k] = 0  # start node transmits to self in 0 time
+
+        # traverse graph
+        while pQ:
+            time, node = heapq.heappop(pQ)
+
+            # we found a better path already, so skip
+            if time > times[node]:
+                continue
+
+            for nei, delay in adj[node]:
+                newTime = time + delay
+
+                # only keep exploring if it's worth it
+                # i.e. current time with delay leads to a minimum
+                if newTime < times[nei]:
+                    times[nei] = newTime
+                    heapq.heappush(pQ, (newTime, nei))
 
         # compute result
         res = max(times)
