@@ -2,7 +2,7 @@ import math
 from typing import List
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         Define base cases, then build dp array from bottom
@@ -30,3 +30,28 @@ class Solution:
             dp[i] = min(c1, c2)
 
         return min(dp[-1], dp[-2])
+
+
+class Solution2:
+    """
+    Intuition:
+        Same as Solution1.
+
+    Runtime:
+        O(n)
+
+    Memory:
+        O(1)
+    """
+
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        N = len(cost)
+        # at given index i
+        # prev2 = lowest cost 2 steps down
+        # prev1 = lowest cost 1 step down
+        prev2, prev1 = cost[0], cost[1]
+
+        for i in range(2, N):
+            prev2, prev1 = prev1, min(prev2 + cost[i], prev1 + cost[i])
+
+        return min(prev1, prev2)
