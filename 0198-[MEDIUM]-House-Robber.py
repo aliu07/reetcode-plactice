@@ -21,6 +21,9 @@ class Solution1:
     """
 
     def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+
         N = len(nums)
 
         if N == 1:
@@ -49,6 +52,9 @@ class Solution2:
     """
 
     def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+
         N = len(nums)
 
         if N == 1:
