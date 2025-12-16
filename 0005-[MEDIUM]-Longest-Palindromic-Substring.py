@@ -14,14 +14,15 @@ class Solution:
     """
 
     def longestPalindrome(self, s: str) -> str:
+        N = len(s)
         res = ""
         resLen = 0
 
-        for i in range(len(s)):
+        for i in range(N):
             # Odd palindromes
             l, r = i, i
 
-            while 0 <= l and r < len(s) and s[l] == s[r]:
+            while 0 <= l and r < N and s[l] == s[r]:
                 if r - l + 1 > resLen:
                     res = s[l : r + 1]
                     resLen = r - l + 1
@@ -32,7 +33,7 @@ class Solution:
             # Even palindromes
             l, r = i, i + 1
 
-            while 0 <= l and r < len(s) and s[l] == s[r]:
+            while 0 <= l and r < N and s[l] == s[r]:
                 if r - l + 1 > resLen:
                     res = s[l : r + 1]
                     resLen = r - l + 1
