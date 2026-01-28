@@ -23,3 +23,20 @@ class Solution:
             seen.add(n)
 
         return False
+
+
+class Solution2:
+    """
+    Intuition:
+        Cheese solution, but did you know that the cost of len() for
+        built-in data structures in Python is O(1)? :)
+
+    Runtime:
+        O(1).
+
+    Memory:
+        O(1).
+    """
+
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        return not len(nums) == len(set(nums))
