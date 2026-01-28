@@ -63,3 +63,28 @@ class Solution2:
                 res = curr
 
         return res
+
+
+class Solution3:
+    """
+    Intuition:
+        Kandane's algorithm with DP approach. Same idea of tracking current sum
+        and highest sum, except the current sum can just be set to the current
+        element in the array as a "reset".
+
+    Runtime:
+        O(n).
+
+    Memory:
+        O(1).
+    """
+
+    def maxSubArray(self, nums: List[int]) -> int:
+        res = nums[0]
+        curr = nums[0]
+
+        for i in range(1, len(nums)):
+            curr = max(curr + nums[i], nums[i])
+            res = max(res, curr)
+
+        return res
