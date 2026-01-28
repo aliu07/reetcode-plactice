@@ -2,7 +2,7 @@ from math import inf
 from typing import List
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         We maintain a dynamic sliding window. We increment the right ptr
@@ -32,5 +32,34 @@ class Solution:
                 res = curr
 
             r += 1
+
+        return res
+
+
+class Solution2:
+    """
+    Intuition:
+        We can use the idea of a sliding window, but optimize it. Notice
+        that we don't need to maintain a left ptr because we just reset
+        the current sum to 0 whenever it becomes negative. Thus, we
+        simplify our loop a lot.
+
+    Runtime:
+        O(n).
+
+    Memory:
+        O(1).
+    """
+
+    def maxSubArray(self, nums: List[int]) -> int:
+        res = -inf
+        curr = 0
+
+        for n in nums:
+            if curr < 0:
+                curr = 0
+            curr += n
+            if curr > res:
+                res = curr
 
         return res
