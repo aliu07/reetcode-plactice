@@ -1,3 +1,6 @@
+from itertools import pairwise
+
+
 class Solution1:
     """
     Intuition:
@@ -68,3 +71,47 @@ class Solution2:
                 l = r
 
         return res
+
+
+class Solution3:
+    """
+    Intuition:
+        Realize that we only ever need to track the length of the
+        current consecutive sequence and the length of the previous
+        consecutive sequence. Whenever our current chain is broken,
+        we can increment our result by min(prev, curr).
+
+    Runtime:
+       O(N).
+
+    Memory:
+        O(1).
+    """
+
+    def countBinarySubstrings(self, s: str) -> int:
+        res = 0
+        # prev = len of prev consecutive seq
+        # curr = len of curr consecutive seq
+        prev, curr = 0, 1
+
+        # numbers = [1, 2, 3, 4, 5]
+        # pairs = itertools.pairwise(numbers)
+        # for pair in pairs:
+        #     print(pair)
+        #
+        # Output:
+        # (1, 2)
+        # (2, 3)
+        # (3, 4)
+        # (4, 5)
+        for c1, c2 in pairwise(s):
+            if c1 == c2:
+                curr += 1
+            else:
+                res += min(prev, curr)
+                prev = curr
+                curr = 1
+
+        # since we only incr result when chars flip (0 -> 1 or vice versa),
+        # we need to incr at the end to collect any uncounted substrings
+        return res + min(prev, curr)
