@@ -6,7 +6,7 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class Solution1:
     """
     Intuition:
         The most obvious approach is to use recursion to traverse the binary
@@ -54,3 +54,58 @@ class Solution:
 
             dfs(root)
             return res
+
+
+class Solution2:
+    """
+    Intuition:
+        Use an iterative DFS approach. We use the subtree dictionary to propagate the
+        subtree sums and node counts and an explicit stack. We use post-order traversal
+        as a node's total sum and node count (used to compute avg) requires knowing the
+        sum and node count for its children first.
+
+    Runtime:
+        O(2n) ~ O(n) as each node needs to be processed twice.
+
+    Memory:
+        O(n) for the stack.
+
+        O(n) for the subtree.
+
+        Overall, O(n) memory.
+
+    """
+
+    def averageOfSubtree(self, root: TreeNode) -> int:
+        res = 0
+        stack = [(root, False)]
+        # maps node -> (sum, node count)
+        subtree = {}
+
+        while stack:
+            node, visited = stack.pop()
+
+            if not node:
+                continue
+
+            if not visited:
+                # revisit node after processing children
+                stack.append((node, True))
+                # push children onto stack
+                stack.append((node.right, False))
+                stack.append((node.left, False))
+            else:
+                leftSum, leftCnt = subtree.get(node.left, (0, 0))
+                rightSum, rightCnt = subtree.get(node.right, (0, 0))
+
+                totSum = node.val + leftSum + rightSum
+                totCnt = 1 + leftCnt + rightCnt
+
+                avg = totSum // totCnt
+
+                if node.val == avg:
+                    res += 1
+
+                subtree[node] = (totSum, totCnt)
+
+        return res
